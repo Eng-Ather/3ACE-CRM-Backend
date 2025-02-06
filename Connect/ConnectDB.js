@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import "dotenv/config";
+// import UserModel from "../Modules/UserSchema";
 
 // Destructure the environment variables
 const { DB_USER, DB_PASSWORD, DB_NAME } = process.env;

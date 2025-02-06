@@ -5,8 +5,8 @@ import 'dotenv/config'
 import userRouter from "./Routes/UserRoutes.js";
 
 const app = express();
-const port = 4000;
-// const port = process.env.PORT || 4000;  // use process.env.PORT for Vercel
+// const port = 4000;
+const port = process.env.PORT || 4000;  // use process.env.PORT for Vercel
 
 
 // for mongo db connection

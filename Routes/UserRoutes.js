@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import sendResponse from "../Helper/SendResponse.js"; // Ensure correct path
+import verifyToken from "../Middelwares/TokenVerification.js";
 
 const userRouter = express.Router();
 
@@ -129,34 +130,41 @@ userRouter.post("/login", async (req, res) => {
     const token = jwt.sign(
       {
         id: user._id,
-        name : user.name,
-        email: user.email,
-        role: user.role,
-        userId: user.userId,
-        position: user.position,
-        cnin: user.cnin,
-        phoneNumber: user.phoneNumber,
-        address: user.address,
+        // name: user.name,
+        // email: user.email,
+        // role: user.role,
+        // userId: user.userId,
       },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,{ expiresIn: "1m" } // Token expires in 10 minutes
     );
 
     const info = {
       id: user._id,
-      name : user.name,
+      name: user.name,
       email: user.email,
       role: user.role,
       userId: user.userId,
-      position: user.position,
-      cnin: user.cnin,
-      phoneNumber: user.phoneNumber,
-      address: user.address,
+      // position: user.position,
+      // cnin: user.cnin,
+      // phoneNumber: user.phoneNumber,
+      // address: user.address,
     };
 
     // Send success response
     sendResponse(res, 200, { info, token }, false, "User login successfully");
   } catch (error) {
     sendResponse(res, 500, null, true, error.message);
+  }
+});
+
+// Route to get current user info
+userRouter.get("/currentUserInfo", verifyToken, async (req, res) => {
+  try {
+    const currentUser = await UserModel.findById(req.user.id).select("-password");
+    console.log("Current User from DB:", currentUser);
+    sendResponse(res, 200, currentUser, false, "Fetched Data Successfully");
+  } catch (error) {
+    sendResponse(res, 500, null, true, "xxxxxxxxxxxxxx");
   }
 });
 

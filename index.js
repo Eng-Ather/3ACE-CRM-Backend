@@ -3,6 +3,7 @@ import mongoose from "./Connect/ConnectDB.js";
 import cors from 'cors'
 import 'dotenv/config'
 import userRouter from "./Routes/UserRoutes.js";
+import projectRouter from "./Routes/NewProjectRoutes.js";
 
 const app = express();
 // const port = 4000;
@@ -29,6 +30,7 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // This will allow us to handle JSON bodies
 
 app.use("/user", userRouter)
+app.use("/projects", projectRouter )
 
 app.listen(port, () => {
   console.log("server is running on port : ", port);

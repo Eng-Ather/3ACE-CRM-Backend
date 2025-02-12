@@ -40,5 +40,16 @@ projectRouter.get("/allproject", async (req, res)=>{
       }
 })
 
+// API to get USER DETAILS
+projectRouter.get("/specific", async (req, res)=>{
+    try{
+    // const allProject = await ProjectsModel.find()
+    // sendResponse(res, 200, allProject, false, "Fetched Data Successfully")
+    }
+    catch (error) {
+        // sendResponse(res, 500, null, true, error.message);
+      }
+})
+
 
 export default projectRouter

@@ -40,6 +40,38 @@ projectRouter.get("/allproject", async (req, res)=>{
       }
 })
 
+// edit project details API
+projectRouter.put("/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedProject = await ProjectsModel.findByIdAndUpdate(id, req.body, { new: true });
+  
+      if (!updatedProject) {
+        return sendResponse(res, 404, null, true, "Project not found");
+      }
+  
+      sendResponse(res, 200, updatedProject, false, "Project details updated successfully");
+    } catch (error) {
+      sendResponse(res, 500, null, true, error.message);
+    }
+  });
+  
+
+// API to delete Project
+  projectRouter.delete("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedProject = await ProjectsModel.findByIdAndDelete(id);
+
+        if (!deletedProject) {
+            return sendResponse(res, 404, null, true, "Project not found");
+        }
+
+        sendResponse(res, 200, null, false, "Project deleted successfully");
+    } catch (error) {
+        sendResponse(res, 500, null, true, error.message);
+    }
+});
 
 
 export default projectRouter

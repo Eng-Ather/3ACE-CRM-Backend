@@ -74,4 +74,20 @@ projectRouter.put("/:id", async (req, res) => {
 });
 
 
+// specific project API
+projectRouter.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const specificProject = await ProjectsModel.findById(id);
+    if (!specificProject) {
+      return sendResponse(res, 404, null, true, "Project not found");
+    }
+    return sendResponse(res, 200, specificProject, false, "Project fetched successfully");
+  } catch (error) {
+    return sendResponse(res, 500, null, true, error.message);
+  }
+});
+
+
+
 export default projectRouter

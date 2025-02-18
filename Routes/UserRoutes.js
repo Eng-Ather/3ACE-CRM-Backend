@@ -174,7 +174,7 @@ userRouter.get("/allUsers", async (req, res) => {
     const allUsers = await UserModel.find().select("-password");
     sendResponse(res, 200, allUsers, false, "Fetched Data Successfully");
   } catch (error) {
-    sendResponse(res, 500, null, true, error.message);
+    sendResponse(res, 500, null, true, "error.message");
   }
 });
 

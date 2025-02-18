@@ -8,14 +8,14 @@ const projectRouter = express.Router()
 projectRouter.post ('/newproject', async (req, res)=>{
     try{
 
-        const {projectTitle,projectType,client,contactNo, email, onboarding,
+        const {projectTitle,projectType,projectID, client,contactNo, email, onboarding,
             salesPerson, status, link, proposedCompletionDate, actualCompletionDate,
-            region, developer
+            region, developer, projectCost
         } = req.body
 
-        const newProject = new ProjectsModel ({projectTitle,projectType,client,contactNo, email, onboarding,
-            salesPerson, status, link, proposedCompletionDate, actualCompletionDate,
-            region, developer
+        const newProject = new ProjectsModel ({projectTitle,projectType, projectID, client,contactNo,
+           email, projectCost, onboarding, salesPerson, status, link, proposedCompletionDate,
+           actualCompletionDate, region, developer, projectCost
         } )
 
         await newProject.save()

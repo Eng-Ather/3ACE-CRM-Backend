@@ -13,6 +13,11 @@ projectRouter.post ('/newproject', async (req, res)=>{
             region, developer, projectCost
         } = req.body
 
+        // checking if project ID already exists
+        const projectIDexist = await ProjectsModel.findOne({projectID})
+        if(projectIDexist){
+          return sendResponse(res, 400, null, true, "Project ID already exists")}
+
         const newProject = new ProjectsModel ({projectTitle,projectType, projectID, client,contactNo,
            email, projectCost, onboarding, salesPerson, status, link, proposedCompletionDate,
            actualCompletionDate, region, developer, projectCost

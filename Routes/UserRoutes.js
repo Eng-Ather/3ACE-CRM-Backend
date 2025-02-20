@@ -135,7 +135,7 @@ userRouter.post("/login", async (req, res) => {
         // role: user.role,
         // userId: user.userId,
       },
-      process.env.JWT_SECRET,{ expiresIn: "1m" } // Token expires in 10 minutes
+      process.env.JWT_SECRET // Token expires in 10 minutes
     );
 
     const info = {
@@ -160,8 +160,17 @@ userRouter.post("/login", async (req, res) => {
 // Route to get current user info
 userRouter.get("/currentUserInfo", verifyToken, async (req, res) => {
   try {
-    const currentUser = await UserModel.findById(req.user.id).select("-password");
+    // const currentUser = await UserModel.findById(req.user._id).select("-password");
+
+    const currentUser = await UserModel.findById(req.user.id);
+    console.log(currentUser);
+    console.log(currentUser);
     console.log("Current User from DB:", currentUser);
+
+    if (!currentUser) {
+      return sendResponse(res, 404, null, true, "User not found in database");
+    }
+
     sendResponse(res, 200, currentUser, false, "Fetched Data Successfully");
   } catch (error) {
     sendResponse(res, 500, null, true, "xxxxxxxxxxxxxx");

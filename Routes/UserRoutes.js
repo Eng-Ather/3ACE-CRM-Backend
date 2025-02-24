@@ -187,6 +187,20 @@ userRouter.get("/allUsers", async (req, res) => {
   }
 });
 
+// API to update user info
+userRouter.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateUser = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+    if (!updateUser) {
+      return sendResponse(res, 404, null, true, "User not found");
+    }
+    sendResponse(res, 200, updateUser, false, "User updated successfully");
+  } catch (error) {
+    sendResponse(res, 500, null, true, error.message);
+  }
+});
+
 // API to get a single user by ID
 // userRouter.get("/:id", async (req, res) => {
 //   try {

@@ -4,6 +4,8 @@ import cors from 'cors'
 import 'dotenv/config'
 import userRouter from "./Routes/UserRoutes.js";
 import projectRouter from "./Routes/NewProjectRoutes.js";
+import projectDetrailsRouter from "./Routes/ProjectDetailsRoutes.js";
+
 
 const app = express();
 // const port = 4000;
@@ -31,6 +33,7 @@ app.use(express.json()); // This will allow us to handle JSON bodies
 
 app.use("/user", userRouter)
 app.use("/projects", projectRouter )
+app.use("/editProjectDetails", projectDetrailsRouter)
 
 app.listen(port, () => {
   console.log("server is running on port : ", port);

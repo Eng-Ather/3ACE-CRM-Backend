@@ -22,7 +22,6 @@ mongoose.connection.on("open", () => {
 });
 
 
-
 // main page message
 app.get("/", (req, res) => {
     res.send("Welcom TO 3ACE TECHNOLOGIES");

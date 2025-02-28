@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const projectDetailSchema = new mongoose.Schema(
   {
     userID: { type: String, required: true },
+    userName: { type: String, required: true },
+    userRole: { type: String, required: true },
     projectID: { type: String, required: true },
+    projecTitle: { type: String, required: true },
     remarks: { type: String, required: true }, // Changed to lowercase
     codeLinks: { type: String },
     deploymnetLink: { type: String },

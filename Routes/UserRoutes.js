@@ -52,49 +52,6 @@ userRouter.post("/signup", async (req, res) => {
   }
 });
 
-// API for login
-// userRouter("login", async (req, res) => {
-//   try {
-//     const { email: currentUserEmail, password: currentUserPassword } = req.body;
-
-//     if (!currentUserEmail || !currentUserPassword) {
-//       sendResponse(
-//         res,
-//         500,
-//         null,
-//         true,
-//         "Both Email and password are required"
-//       );
-//       return;
-//     }
-
-//     const user = await UserModel.findOne({ email: currentUserEmail }).lean();
-//     if (!user) {
-//       sendResponse(res, 404, null, true, "User not found");
-//       return;
-//     }
-//     // Compare the provided password with the hashed password in the database
-//     const isPasswordValid = await bcrypt.compare(
-//       currentUserPassword,
-//       user.password
-//     );
-
-//     if (!isPasswordValid) {
-//       sendResponse(res, 401, null, true, "Invalid password");
-//       return;
-//     }
-//     // Generating token
-//     var token = jwt.sign(user, process.env.JWT_SECRET);
-//     // console.log(token);
-
-//     sendResponse(res, 200, res, { user, token }, "User login successfully");
-//     return
-
-//   } catch (error) {
-//     sendResponse(res, 500, null, true, error.message);
-//   }
-// });
-
 userRouter.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -191,7 +148,9 @@ userRouter.get("/allUsers", async (req, res) => {
 userRouter.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updateUser = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+    const updateUser = await UserModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!updateUser) {
       return sendResponse(res, 404, null, true, "User not found");
     }

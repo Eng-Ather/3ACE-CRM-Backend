@@ -20,6 +20,7 @@ export const CreateSalesRecord =  async (req, res) => {
       onboarding,
       actualCompletionDate,
       projectDeliveryDate,
+      status
     } = req.body;
 
     if (!projectID)
@@ -52,6 +53,7 @@ export const CreateSalesRecord =  async (req, res) => {
       onboarding,
       actualCompletionDate,
       projectDeliveryDate,
+      status
     });
     await salesRecord.save();
     sendResponse(res, 201, salesRecord, false, "import to sales successfully");
@@ -61,7 +63,7 @@ export const CreateSalesRecord =  async (req, res) => {
 }
 
 //to get All Project Sales Record
-export const AllProjectSalesRecord =  async (re, res) => {
+export const AllProjectsSalesRecord =  async (re, res) => {
     try {
       const allProjectsRecord = await ProjectSalesModel.find();
       if (!allProjectsRecord) {
@@ -71,6 +73,7 @@ export const AllProjectSalesRecord =  async (re, res) => {
         res,
         201,
         allProjectsRecord,
+        false,
         "Fetch Sales Record Successfully"
       );
     } catch (error) {

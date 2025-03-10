@@ -11,13 +11,24 @@ const projectSalesSchema = new mongoose.Schema(
     salesPerson: { type: String, required: true },
     assignto: { type: String, default: "Not Assigned" },
     assignedDate: { type: Date, default: null },
-
-    projectCost: { type: String, default: null }, //project cost
-    paymentDetails: { type: [String], default: null },
+    projectCost: { type: String, default: null },
+    
+    paymentDetails: {
+      type: [
+        {
+          amount: { type: Number, required: true },
+          date: { type: Date, required: true },
+          purpose: { type: String, required: true },
+        },
+      ],
+      default: null,
+    },
 
     onboarding: { type: Date, required: true },
-    actualCompletionDate: { type: Date, default: "Actual Completio Date" },
+    actualCompletionDate: { type: Date, default: "Actual Completion Date" },
     projectDeliveryDate: { type: Date, default: "Project Delivery Dtae" },
+    status: { type: String, required: true, enum: ["In Progress", "Completed", "Pending"] }, // Fixed "Completed"
+
   },
   { timestamps: true }
 );

@@ -80,3 +80,36 @@ export const AllProjectsSalesRecord =  async (re, res) => {
       return sendResponse(res, 500, null, true, error.message);
     }
   }
+
+  //to get Individual Project Sales Record
+  export const ProjectsSalesRecord =  async (req, res) => {
+    try{ 
+        const {projectID } = req.body;
+        const projectRecord = await ProjectSalesModel.findOne({projectID});
+
+       if(!projectRecord){
+            return sendResponse(res, 400, null, true, "No Record Found");
+        }
+        return sendResponse(res, 200, projectRecord, false, "fetch data Successfully");
+    }
+    catch (error) {
+      return sendResponse(res, 500, null, true, error.message);
+    }
+  }
+
+  // to delete Project Sales Record
+  export const DeleteProjectSalesRecord = async (req, res) => {
+    
+      try {
+        const { projectID } = req.body;
+        const deletedSales = await ProjectSalesModel.findOneAndDelete({projectID});
+    
+        if (!deletedSales) {
+          return sendResponse(res, 404, null, true, "Project not found");
+        }
+    
+        sendResponse(res, 200, null, false, "Project deleted successfully");
+      } catch (error) {
+        sendResponse(res, 500, null, true, error.message);
+      }
+  }

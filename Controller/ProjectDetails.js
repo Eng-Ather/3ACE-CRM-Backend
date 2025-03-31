@@ -8,7 +8,7 @@ export const getProjectDetails = async (req, res) => {
       const { projectID } = req.body;
       const getProjectDetails = await ProjectDetailModel.find({ projectID });
   
-      if (!getProjectDetails.length) {
+      if (!getProjectDetails) {
         return sendResponse(res, 400, null, true, "No Record Found");
       }
       sendResponse(

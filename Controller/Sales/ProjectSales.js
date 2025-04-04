@@ -13,12 +13,9 @@ export const CreateSalesRecord =  async (req, res) => {
       contactNo,
       email,
       salesPerson,
-      assignto,
-      assignedDate,
+      salesPersonID,
       projectCost,
       paymentDetails,
-      onboarding,
-      actualCompletionDate,
       projectDeliveryDate,
       status
     } = req.body;
@@ -46,17 +43,14 @@ export const CreateSalesRecord =  async (req, res) => {
       contactNo,
       email,
       salesPerson,
-      assignto,
-      assignedDate,
+      salesPersonID,
       projectCost,
       paymentDetails,
-      onboarding,
-      actualCompletionDate,
       projectDeliveryDate,
       status
     });
     await salesRecord.save();
-    sendResponse(res, 201, salesRecord, false, "import to sales successfully");
+    sendResponse(res, 201, salesRecord, false, "Data Import to Sales Record Successfully");
   } catch (error) {
     sendResponse(res, 500, null, true, error.message);
   }

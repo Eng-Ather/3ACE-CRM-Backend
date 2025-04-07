@@ -91,6 +91,29 @@ export const AllProjectsSalesRecord =  async (re, res) => {
     }
   }
 
+  // API to update project of sales Record
+  export const EditProjectSalesRecord = async (req, res)=>{
+
+    try {
+    const { projectID, updatSalesdData} = req.body;
+    const updateRecord = await ProjectSalesModel.findOneAndUpdate(
+      { projectID },                // Filter condition
+      { $set: updatSalesdData },        // Fields to update
+      { new: true }                 // Return updated document
+    );
+    if(!updateRecord){
+      return sendResponse (res, 404, null, true, "User not found");
+    }
+    sendResponse(res, 200, updateRecord, false, "updates successfully" )
+    }
+    catch (error){
+      return sendResponse(res, 500, null, true, error.message);
+    }
+    }
+
+
+    
+
   // to delete Project Sales Record
   export const DeleteProjectSalesRecord = async (req, res) => {
     

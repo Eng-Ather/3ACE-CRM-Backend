@@ -13,21 +13,20 @@ const projectSalesSchema = new mongoose.Schema(
     // assignto: { type: String, default: "Not Assigned" },
     // assignedDate: { type: Date, default: null },
     projectCost: { type: String, default: null },
-    
-    paymentDetails: {
+    paymentDetails: { 
       type: [
         {
-          amount: { type: Number, default:"N/A" },
-          date: { type: Date, default:"N/A" },
-          purpose: { type: String, default:"N/A" },
-        },
+          amount: { type: Number },
+          date: { type: Date },
+          purpose: { type: String, default: "N/A" }
+        }
       ],
-      default: null,
+      default: [] // Ensures it's never null
     },
 
     // onboarding: { type: Date, required: true },
     // actualCompletionDate: { type: Date, default: "Actual Completion Date" },
-    projectDeliveryDate: { type: Date, default: "Project Delivery Dtae" },
+    projectDeliveryDate: { type: Date, default: null },
     status: { type: String, required: true, enum: ["In Progress", "Completed", "Pending"] },
 
   },

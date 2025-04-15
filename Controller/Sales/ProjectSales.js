@@ -1,7 +1,6 @@
 import sendResponse from "../../Helper/SendResponse.js";
 import ProjectSalesModel from "../../Modules/ProjectSales.js";
 
-
 //to Create Project sales Record
 export const CreateSalesRecord =  async (req, res) => {
   try {
@@ -110,9 +109,6 @@ export const AllProjectsSalesRecord =  async (re, res) => {
       return sendResponse(res, 500, null, true, error.message);
     }
     }
-
-
-    
 
   // to delete Project Sales Record
   export const DeleteProjectSalesRecord = async (req, res) => {

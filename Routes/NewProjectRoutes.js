@@ -10,7 +10,7 @@ projectRouter.post("/newproject", async (req, res) => {
     const {
       projectTitle,
       projectType,
-      projectID,
+      // projectID,
       client,
       contactNo,
       email,
@@ -28,15 +28,15 @@ projectRouter.post("/newproject", async (req, res) => {
     } = req.body;
 
     // checking if project ID already exists
-    const projectIDexist = await ProjectsModel.findOne({ projectID });
-    if (projectIDexist) {
-      return sendResponse(res, 400, null, true, "Project ID already exists");
-    }
+    // const projectIDexist = await ProjectsModel.findOne({ projectID });
+    // if (projectIDexist) {
+    //   return sendResponse(res, 400, null, true, "Project ID already exists");
+    // }
 
     const newProject = new ProjectsModel({
       projectTitle,
       projectType,
-      projectID,
+      // projectID,
       client,
       contactNo,
       email,

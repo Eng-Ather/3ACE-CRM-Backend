@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
     cnin: { type: String, required: true, unique: true },
     phoneNumber: { type: [String], required: true }, 
     address: { type: String, required: true },
+    joiningDate: {type:Date, required:true}
   },
   {
     timestamps: true,

@@ -22,7 +22,7 @@ export const EditProfile = async (req, res) => {
       });
       
       if (!updateUser) {
-        return sendResponse(res, 404, null, true, "User not found");
+        return sendResponse(res, 404, null, true, "User not found......");
       }
       
       sendResponse(res, 200, updateUser, false, "User updated successfully");

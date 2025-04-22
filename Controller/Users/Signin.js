@@ -57,10 +57,10 @@ export const Signin = async (req, res) => {
         email: user.email,
         role: user.role,
         userId: user.userId,
-        // position: user.position,
-        // cnin: user.cnin,
-        // phoneNumber: user.phoneNumber,
-        // address: user.address,
+        position: user.position,
+        cnin: user.cnin,
+        phoneNumber: user.phoneNumber,
+        address: user.address,
       };
   
       // Send success response
